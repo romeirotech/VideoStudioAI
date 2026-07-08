@@ -1,5 +1,6 @@
 from core.video_info import VideoInfo
 from core.converter import Converter
+
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction
 from PySide6.QtWidgets import (
@@ -87,6 +88,10 @@ class MainWindow(QMainWindow):
         self.button.clicked.connect(self.open_video)
 
         layout.addWidget(self.button)
+        self.convert_button = QPushButton("🚀 Converter")
+        self.convert_button.setFixedHeight(45)
+        self.convert_button.clicked.connect(self.convert_video)
+        layout.addWidget(self.convert_button)
 
         self.statusBar().showMessage("Aguardando vídeo...")
 
@@ -170,10 +175,21 @@ class MainWindow(QMainWindow):
 
     def video_loaded(self,arquivo):
 
+        self.video = arquivo
+
         self.drop.label.setText(f"✅\n\n{arquivo}")
 
         self.statusBar().showMessage("Vídeo carregado.")
         info = VideoInfo.get(arquivo)
 
         print(info)
-        self.video = arquivo
+    
+    def convert_video(self):
+
+        if not hasattr(self, "video"):
+            self.statusBar().showMessage("Selecione um vídeo primeiro.")
+            return
+
+        saida = Converter.to_reels(self.video)
+
+        self.statusBar().showMessage(f"Concluído: {saida}")
