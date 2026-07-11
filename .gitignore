@@ -1,12 +1,5 @@
-__pycache__/
-*.py[cod]
-
-.vscode/
-
+videos/
 output/
-
-.env
-.venv/
-venv/
-
-*.log
+*.mp4
+__pycache__/
+*.pyc
