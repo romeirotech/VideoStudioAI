@@ -1,0 +1,39 @@
+https://github.com/romeirotech/VideoStudioAI.git
+
+ C:\1Projetos\Python\ChatGPT\VideoStudioAI>
+C:\1Projetos\Python\ChatGPT\Romeirotech\VideoStudioAI
+
+"Primeiro funciona. Depois fica bonito. Depois fica rápido."
+
+Vamos criar uma regra oficial para o VideoStudioAI:
+
+"Nunca misturar interface com lógica de conversão."
+
+Isso significa:
+ui/ → apenas interface.
+core/ → apenas processamento.
+main.py → inicia a aplicação.
+
+
+Se estiver tudo certo:
+git add .
+git commit -m "V1.1 - Interface compacta"
+git push
+
+
+
+Vamos produzir.
+
+
+sugestão de trabalho 
+
+Acho melhor fazermos assim daqui para frente:
+
+Você me envia o main_window.py.
+Eu devolvo o arquivo inteiro, já testado e organizado.
+Você substitui o arquivo e testa.
+
+Isso reduz muito a chance de erro e evita esse "vai e volta" de pequenos ajustes.
+
+
+

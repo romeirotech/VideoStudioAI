@@ -1,3 +1,5 @@
+import os
+
 from core.video_info import VideoInfo
 from core.converter import Converter
 
@@ -10,9 +12,9 @@ from PySide6.QtWidgets import (
     QLabel,
     QPushButton,
     QVBoxLayout,
+    QHBoxLayout,
     QFrame,
 )
-
 
 class DropArea(QFrame):
     def __init__(self, parent):
@@ -65,7 +67,8 @@ class MainWindow(QMainWindow):
 
         super().__init__()
 
-        self.resize(1100,700)
+        self.resize(900,600)
+        self.setMinimumSize(900,600)
 
         self.setWindowTitle("VideoStudio AI")
 
@@ -78,30 +81,38 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(central)
 
         self.drop = DropArea(self)
+        self.drop.setMaximumHeight(330)
 
-        layout.addWidget(self.drop)
+
+
+
+        layout.addWidget(self.drop, 1)
 
         self.button = QPushButton("Selecionar Vídeo")
 
         self.button.setFixedHeight(45)
 
         self.button.clicked.connect(self.open_video)
+#aqui
+        buttons = QHBoxLayout()
 
-        layout.addWidget(self.button)
+        buttons.addWidget(self.button)
+
         self.convert_button = QPushButton("🚀 Converter")
         self.convert_button.setFixedHeight(45)
         self.convert_button.clicked.connect(self.convert_video)
-        layout.addWidget(self.convert_button)
-
+        buttons.addWidget(self.convert_button)
+        layout.addLayout(buttons,0)
+#at aqui
         self.statusBar().showMessage("Aguardando vídeo...")
 
         self.setStyleSheet("""
 
         QMainWindow{
 
-            background:#202124;
+        background:#202124;
 
-        }
+    }
 
         QPushButton{
 
@@ -175,14 +186,14 @@ class MainWindow(QMainWindow):
 
     def video_loaded(self,arquivo):
 
-        self.video = arquivo
+       self.video = arquivo
+       nome = os.path.basename(arquivo)
+       self.drop.label.setText(f"✅\n\n{nome}")
 
-        self.drop.label.setText(f"✅\n\n{arquivo}")
+       self.statusBar().showMessage("Vídeo carregado.")
+       info = VideoInfo.get(arquivo)
 
-        self.statusBar().showMessage("Vídeo carregado.")
-        info = VideoInfo.get(arquivo)
-
-        print(info)
+       print(info)
     
     def convert_video(self):
 
